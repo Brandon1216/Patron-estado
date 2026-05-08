@@ -1,8 +1,6 @@
 # PROMPT PARA GENERAR DIAGRAMA UML - PATRÓN DE ESTADO
 
-## 📋 Instrucciones para IA de Diagramas
 
-Por favor, genera un diagrama UML completo para el siguiente sistema que implementa el Patrón de Diseño de Estado:
 
 ---
 
