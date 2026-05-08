@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Estacionamiento Inteligente - Versión Modular</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-white mb-2">
+                <i class="fas fa-parking mr-3"></i>
+                Sistema de Estacionamiento Inteligente
+            </h1>
+            <p class="text-blue-200 mb-2"></p>
+            <div class="bg-green-600/20 border border-green-400 rounded-lg px-4 py-2 inline-block">
+               
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="max-w-6xl mx-auto">
+            <!-- State Display -->
+            <section class="bg-white/10 backdrop-blur-md rounded-xl p-6 mb-8">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-semibold text-white mb-2">Estado Actual</h2>
+                        <div class="flex items-center space-x-4">
+                            <span id="estadoActual" class="text-3xl font-bold text-yellow-400">CERRADA</span>
+                            <span id="estadoIcon" class="text-4xl">🔒</span>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-white/80 text-sm mb-1">Transiciones</p>
+                        <p id="transicionCount" class="text-2xl font-bold text-green-400">0</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Visual Gate System -->
+            <section class="bg-white/10 backdrop-blur-md rounded-xl p-8 mb-8">
+                <h3 class="text-xl font-semibold text-white mb-6 text-center">Vista del Sistema de Acceso</h3>
+                
+                <div class="relative bg-gradient-to-b from-sky-400 to-sky-600 rounded-lg p-8 h-64 overflow-hidden gate-container">
+                    <!-- Sky and Road -->
+                    <div class="absolute inset-0">
+                        <!-- Road -->
+                        <div class="absolute bottom-0 left-0 right-0 h-20 bg-gray-800">
+                            <div class="absolute inset-x-0 top-1/2 transform -translate-y-1/2 h-1 bg-yellow-400"></div>
+                        </div>
+                        
+                        <!-- Gate Structure -->
+                        <div class="absolute left-1/2 bottom-20 transform -translate-x-1/2">
+                            <!-- Gate Pole -->
+                            <div class="w-4 h-32 bg-gray-700 rounded-t-lg"></div>
+                            <!-- Barrier Arm -->
+                            <div id="barrierArm" class="gate-pole absolute -right-32 top-0 w-32 h-2 bg-red-600 rounded-full barrier-closed">
+                                <div class="absolute right-0 top-1/2 transform -translate-y-1/2 w-4 h-4 bg-red-700 rounded-full"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Car -->
+                        <div id="car" class="car-animation absolute bottom-24 left-8 w-16 h-10">
+                            <div class="bg-blue-600 rounded-lg h-full relative">
+                                <div class="absolute bottom-0 left-2 w-3 h-3 bg-gray-800 rounded-full"></div>
+                                <div class="absolute bottom-0 right-2 w-3 h-3 bg-gray-800 rounded-full"></div>
+                                <div class="absolute top-1 left-1 right-1 h-3 bg-blue-400 rounded"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Card Reader -->
+                        <div class="absolute left-1/2 bottom-32 transform -translate-x-1/2 -translate-x-20">
+                            <div class="w-12 h-16 bg-gray-900 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-credit-card text-green-400 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Control Panel -->
+            <section class="bg-white/10 backdrop-blur-md rounded-xl p-6 mb-8">
+                <h3 class="text-xl font-semibold text-white mb-6">Panel de Control</h3>
+                
+                <div class="grid md:grid-cols-2 gap-6 control-panel">
+                    <!-- Credential Controls -->
+                    <div class="bg-white/5 rounded-lg p-4">
+                        <h4 class="text-lg font-medium text-white mb-4">
+                            <i class="fas fa-id-card mr-2"></i>
+                            Control de Credenciales
+                        </h4>
+                        <div class="space-y-3">
+                            <button id="btnValidCredential" class="btn-control w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg">
+                                <i class="fas fa-check-circle mr-2"></i>
+                                Pasar Credencial Válida
+                            </button>
+                            <button id="btnInvalidCredential" class="btn-control w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg">
+                                <i class="fas fa-times-circle mr-2"></i>
+                                Pasar Credencial Inválida
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Vehicle Detection -->
+                    <div class="bg-white/5 rounded-lg p-4">
+                        <h4 class="text-lg font-medium text-white mb-4">
+                            <i class="fas fa-car mr-2"></i>
+                            Detección de Vehículos
+                        </h4>
+                        <button id="btnDetectVehicle" class="btn-control w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg">
+                            <i class="fas fa-eye mr-2"></i>
+                            Detectar Paso de Vehículo
+                        </button>
+                        <p class="text-white/60 text-sm mt-2">Solo disponible cuando la pluma está abierta</p>
+                    </div>
+                </div>
+            </section>
+
+           
+
+            <!-- Log Console -->
+            <section class="bg-white/10 backdrop-blur-md rounded-xl p-6">
+                <h3 class="text-xl font-semibold text-white mb-4">
+                    <i class="fas fa-terminal mr-2"></i>
+                    Consola de Eventos
+                </h3>
+                <div id="logConsole" class="log-console bg-black/50 rounded-lg p-4 h-48 overflow-y-auto">
+                    <div class="text-green-400">🚦 Sistema de Estacionamiento Inteligente Iniciado</div>
+                    <div class="text-yellow-400">🔒 Pluma en estado CERRADA</div>
+                    <div class="text-blue-400">🎯 Versión modular: Patrón de Estado en archivos separados</div>
+                </div>
+                <button id="btnClearLog" class="mt-3 bg-gray-600 hover:bg-gray-700 text-white text-sm py-2 px-4 rounded transition duration-300">
+                    <i class="fas fa-eraser mr-2"></i>
+                    Limpiar Consola
+                </button>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+</body>
+</html>

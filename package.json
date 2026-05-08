@@ -1,0 +1,27 @@
+{
+  "name": "pluma-inteligente",
+  "version": "1.0.0",
+  "description": "Sistema de estacionamiento inteligente utilizando el Patrón de Diseño de Estado",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "state-pattern",
+    "design-patterns",
+    "parking-system",
+    "intelligent-gate",
+    "javascript",
+    "web-interface"
+  ],
+  "author": "Sistema de Estacionamiento Inteligente",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

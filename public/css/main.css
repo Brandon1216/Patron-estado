@@ -1,0 +1,104 @@
+/* Estilos principales del sistema de estacionamiento */
+
+/* Animaciones de la barrera */
+@keyframes barrierUp {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-90deg); }
+}
+
+@keyframes barrierDown {
+    from { transform: rotate(-90deg); }
+    to { transform: rotate(0deg); }
+}
+
+/* Estados de la barrera */
+.barrier-closed {
+    transform: rotate(0deg) !important;
+}
+
+.barrier-open {
+    transform: rotate(-90deg) !important;
+}
+
+.barrier-up {
+    animation: barrierUp 2s ease-in-out forwards;
+}
+
+.barrier-down {
+    animation: barrierDown 1.5s ease-in-out forwards;
+}
+
+/* Configuración de la barrera */
+.gate-pole {
+    transform-origin: bottom center;
+    transition: transform 0.3s ease;
+}
+
+/* Efecto de pulso */
+.pulse-glow {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 10px rgba(34, 197, 94, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(34, 197, 94, 0.8); }
+}
+
+/* Animación del coche */
+.car-animation {
+    transition: all 2s ease-in-out;
+}
+
+.car-passing {
+    transform: translateX(400px);
+}
+
+/* Estilos adicionales para la interfaz */
+.state-indicator {
+    transition: all 0.3s ease;
+}
+
+.btn-control {
+    transition: all 0.2s ease;
+}
+
+.btn-control:hover {
+    transform: translateY(-2px);
+}
+
+.btn-control:active {
+    transform: translateY(0);
+}
+
+.btn-control:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Consola de logs */
+.log-console {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.log-entry {
+    padding: 2px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.log-entry:last-child {
+    border-bottom: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .gate-container {
+        transform: scale(0.8);
+    }
+    
+    .control-panel {
+        grid-template-columns: 1fr;
+    }
+}
